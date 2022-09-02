@@ -1,7 +1,7 @@
 //Some value
 //let budget = 2000;
 
-//UI Elements
+//UI budget
 const setBudget = document.querySelector('#set-budget'),
       inputBudget = document.querySelector('#input-budget'),
       submitBudget = document.querySelector('#submit-budget'),
@@ -15,7 +15,7 @@ const spending = document.getElementById('spending');
 const spendingTable = document.getElementById('spending-table'); 
 const doneBtn = document.getElementById('done-btn'); 
 const doneSpending = document.getElementById('done-spending');
-
+const totalSpending = document.getElementById('total-spending');
 
 
 // Assign UI budget number
@@ -32,13 +32,13 @@ setBudget.addEventListener('click', function(){
     } else if(budget < 50) {
         setMessage(`Please be serious and Save sometihng!!!`);
         inputBudget.value = 'Please set your monthly goal';
-        // spending.style.display = 'none';
+        spending.style.display = 'none';
     }
 
-// Set Message
-function setMessage(msg) {
-    budgetMessage.innerHTML = msg;
-  }
+    // Set Message
+    function setMessage(msg) {
+        budgetMessage.innerHTML = msg;
+    }
 });
 
 //Listen for Submit
@@ -58,7 +58,7 @@ function addSpending(e) {
     // Insert cols
     row.innerHTML = `
      <th scope="row">${description.value}</th>
-    <td>${amount.value}</td>
+    <td>$${amount.value}</td>
     <td><a href='#' class="delete">X</a></td>
     `;
     
@@ -67,8 +67,38 @@ function addSpending(e) {
 
     // Display Spending Table
     spendingTable.style.display = 'block';
-    doneBtn.style.display = 'block;'
+    doneBtn.style.display = 'block';
 
+    // Add Total Spending
+    
+
+    // Add total function
+    
+
+    let total = 0;
+    let spendingArr = [];
+    function addTotal(arr) {
+       
+        
+       total += arr[i];
+       
+    
+    }
+    addTotal(spendingArr.push(parseInt(amount.value)));
+
+    console.log(spendingArr);
+    console.log(total);
+
+
+
+    // Set Total spending
+    setMessage(`Total spending: $${total}`);
+
+    // Set Message
+    function setMessage(msg) {
+    totalSpending.innerHTML = msg;
+    }
+    
     description.value = '';
     amount.value = '';
 
