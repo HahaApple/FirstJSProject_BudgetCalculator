@@ -1,5 +1,3 @@
-//Some value
-//let budget = 2000;
 
 //UI budget
 const setBudget = document.querySelector('#set-budget'),
@@ -12,95 +10,118 @@ const description = document.getElementById('description');
 const amount = document.getElementById('amount');  
 const spendingForm = document.getElementById('spending-form');
 const spending = document.getElementById('spending'); 
-const spendingTable = document.getElementById('spending-table'); 
+const spendingTable = document.getElementById('spending-table');
+const spendingList = document.getElementById('spending-list'); 
 const doneBtn = document.getElementById('done-btn'); 
 const doneSpending = document.getElementById('done-spending');
 const totalSpending = document.getElementById('total-spending');
 
+// Load all event listeners
+loadEventListeners();
 
-// Assign UI budget number
-//inputBudget.textContent = budget;
-   
-//Listen for Go
-setBudget.addEventListener('click', function(){
-    let budget = parseInt(inputBudget.value);
+function loadEventListeners() {
+    // Listen for Go
+    setBudget.addEventListener('click', setGoal);
+
+    //Listen for Submit
+    spendingForm.addEventListener('submit', addSpending);
+
+    //Remove Item from list
+    spendingList.addEventListener('click', removeItem);
+}
+
+
+function setGoal(e) {
+    let budget = parseFloat(inputBudget.value).toFixed(2);
    
     if(budget >= 50) {
-       setMessage(`You've set your saving goal to $${budget}`);
+       setMessage(`You've set your saving goal to $${budget}`, 'green');
+       inputBudget.value = '';
+       submitBudget.value = 'Change Goal';
        spending.style.display = 'block';
        
     } else if(budget < 50) {
-        setMessage(`Please be serious and Save sometihng!!!`);
+        setMessage(`Please try to save sometihng!!!`, 'red');
         inputBudget.value = 'Please set your monthly goal';
         spending.style.display = 'none';
     }
 
     // Set Message
-    function setMessage(msg) {
+    function setMessage(msg, color) {
         budgetMessage.innerHTML = msg;
-    }
-});
+        budgetMessage.style.color = color;
+    } 
+    e.preventDefault();
+};
 
-//Listen for Submit
-spendingForm.addEventListener('submit', addSpending);
+
+
 
 // Submit Spending
 function addSpending(e) {
-    if(description.value === '' || amount.value === '' || amount.value < 0) {
+    let spendingAmout = parseFloat(amount.value).toFixed(2);
+
+    if(description.value === '' || spendingAmout === '' || spendingAmout < 0) {
         alert('Please add your spending.');
-    }
-   
-    const list = document.getElementById('spending-list');
+    } else {
+        
 
-    // Create tr element
-    const row = document.createElement('tr');
+        const list = document.getElementById('spending-list');
 
-    // Insert cols
-    row.innerHTML = `
-     <th scope="row">${description.value}</th>
-    <td>$${amount.value}</td>
-    <td><a href='#' class="delete">X</a></td>
-    `;
-    
-    // Append Child to list
-    list.appendChild(row);
+        // Create tr element
+        const row = document.createElement('tr');
 
-    // Display Spending Table
-    spendingTable.style.display = 'block';
-    doneBtn.style.display = 'block';
+        // Add content to element
+        row.innerHTML = `
+        <th scope="row">${description.value}</th>
+        <td>$${spendingAmout}</td>
+        <td><a href='#' class="delete">X</a></td>
+        `;
+        
+        // Append Child to list
+        list.appendChild(row);
 
-    // Add Total Spending
-    
-
-    // Add total function
-    
-
-    let total = 0;
-    let spendingArr = [];
-    function addTotal(arr) {
+        console.log(spendingAmout);
+        // Add Total Spending
+        let total = '';
+        // total += spendingAmout;
+        let spendingArr = []; 
+        spendingArr.push(spendingAmout);
+        console.log(spendingArr);
+        for (let i = 0; i < spendingArr.length; i++) {
+        total += spendingArr[i];
+        }
+        //Add total function
        
         
-       total += arr[i];
-       
-    
-    }
-    addTotal(spendingArr.push(parseInt(amount.value)));
-
-    console.log(spendingArr);
-    console.log(total);
 
 
 
-    // Set Total spending
-    setMessage(`Total spending: $${total}`);
+        // Set Total spending
+        setMessage(`Total spending: $${total}`);
+
+        // Display Spending Table
+        spendingTable.style.display = 'block';
+        doneBtn.style.display = 'block';
 
     // Set Message
     function setMessage(msg) {
-    totalSpending.innerHTML = msg;
+        
+        totalSpending.innerHTML = msg;
+    } 
+        
+        description.value = '';
+        amount.value = '';
     }
-    
-    description.value = '';
-    amount.value = '';
+    e.preventDefault();
+}
 
+// Remove Item from List
+function removeItem(e) {
+    if(e.target.classList.contains('delete')) {
+        if(confirm('Are you sure?')){
+            e.target.parentElement.parentElement.remove();
+        }
+    }
     e.preventDefault();
 }
