@@ -120,7 +120,13 @@ function removeItem(e) {
             let itemAmount = parseInt(e.target.parentElement.previousElementSibling.childNodes[1].innerHTML);
             total -= itemAmount;
             totalAmount.innerHTML= total;
-            console.log(total);
+           
+            setMessage(`Total spending: $${total}`);
+
+            // Set Message
+            function setMessage(msg) {
+                totalMessage.innerHTML = msg;
+            } 
                       
         }
         
