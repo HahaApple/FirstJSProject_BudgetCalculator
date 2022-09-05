@@ -66,9 +66,10 @@ function setGoal(e) {
 
 // Submit Spending
 function addSpending(e) {
-    let spendingAmout = parseInt(amount.value);
+    let spendingAmout = amount.value;
+    let spendingItemAmount = parseInt(spendingAmout);
 
-    if(description.value === '' || spendingAmout === '' || spendingAmout < 0) {
+    if(description.value === '' || spendingAmout === '' || spendingAmout <= 0) {
         alert('Please add your spending.');
     } else {
         const list = document.getElementById('spending-list');
@@ -79,7 +80,7 @@ function addSpending(e) {
         // Add content to element
         row.innerHTML = `
         <th scope="row">${description.value}</th>
-        <td>$<span>${spendingAmout}</span></td>
+        <td>$<span>${spendingItemAmount}</span></td>
         <td><a href='#' class="delete text-dark text-decoration-none">X</a></td>
         `;
         
@@ -87,7 +88,7 @@ function addSpending(e) {
         list.appendChild(row);
 
         // Add total
-        amountList.push(spendingAmout);
+        amountList.push(spendingItemAmount);
         if(amountList.length > 0) {
         total = amountList.reduce((pre, curr) => pre + curr, 0); }
         //addTotalAmount();
@@ -126,12 +127,9 @@ function removeItem(e) {
             // Set Message
             function setMessage(msg) {
                 totalMessage.innerHTML = msg;
-            } 
-                      
+            }       
         }
-        
     }
-    
   e.preventDefault();
 }
 
@@ -153,6 +151,5 @@ function submitDone(e) {
         finalMessage.innerHTML = msg;
         finalMessage.style.color = color;
     }
-
     e.preventDefault();
 }
