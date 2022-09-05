@@ -19,7 +19,7 @@
             <div class="col-lg-6 mx-auto">
                 <h1 class="mt-4">Once upon a time, I had a Daydream...</h1>
                 <img class="my-4" src="img/DayDreamingPics.JPG" width="400em" alt="DayDreamingPics">
-                <h2>Let's start saving today!</h2>
+                <h1>Let's start saving today!!!</h1>
             </div>
             <div class="col-lg-6 mx-auto">
                 <h1 class="my-4">Budget Calculator</h1>
@@ -62,38 +62,19 @@
                         <th scope="col"></th>
                       </tr>
                     </thead>
-                    <tbody id="spending-list">
-                        <!-- <tr>
-                            <th scope="row">Mortgage</th>
-                            <td>$1500</td>
-                            <td>X</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Grocery</th>
-                            <td>$800</td>
-                            <td>X</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Car</th>
-                            <td>$300</td>
-                            <td>X</td>
-                        </tr> -->
-                    </tbody>
+                    <tbody id="spending-list"></tbody>
                   </table>
 
                 <!--Message total spending--> 
-                <h4 id="total-spending" class="pt-2"></h4>
+                <h4 id="total-message" class="pt-2"><span id="total-amount"></span></h4>
                  
 
-                <div class="d-grid mt-5" id="done-spending">
+                <form class="d-grid mt-5" id="done-spending">
                     <input id="done-btn" class="btn btn-dark" type="submit" value="Done!">
-                </div>
+                </form>
                 
                 <!--Final Message-->
-                <!-- <div id="final-message" class="mt-4">
-                    <h4>Congrats! You spent $400 less than your budget!</h4>
-                    <h4>Oooops! You spent $400 more than your budget!</h4>
-                </div> -->
+                <div id="final-message" class="display-4 mt-4"></div> 
             </div>
         </div>
     </div>
