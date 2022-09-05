@@ -11,6 +11,12 @@
         #spending, #spending-table, #done-btn {
             display: none;
         }
+        thead, tbody {
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -19,7 +25,7 @@
             <div class="col-lg-6 mx-auto">
                 <h1 class="mt-4">Once upon a time, I had a Daydream...</h1>
                 <img class="my-4" src="img/DayDreamingPics.JPG" width="400em" alt="DayDreamingPics">
-                <h1>Let's start saving today!!!</h1>
+                <h1 class="text-danger">Let's start saving today!!!</h1>
             </div>
             <div class="col-lg-6 mx-auto">
                 <h1 class="my-4">Budget Calculator</h1>
@@ -64,7 +70,7 @@
                     </thead>
                     <tbody id="spending-list"></tbody>
                   </table>
-
+                  
                 <!--Message total spending--> 
                 <h4 id="total-message" class="pt-2"><span id="total-amount"></span></h4>
                  

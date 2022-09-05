@@ -19,7 +19,7 @@ const totalAmount = document.getElementById('total-amount');
 const finalMessage = document.getElementById('final-message');
 const amountList = [];
 
-let total = 0;
+let total;
 
 
 // Load all event listeners
@@ -45,14 +45,14 @@ function setGoal(e) {
     let budget = parseInt(inputBudget.value);
    
     if(budget >= 50) {
-       setMessage(`You've set your saving goal to $${budget}`, 'green');
+       setMessage(`You've set your budget to $${budget}`, 'green');
        //inputBudget.value = '';
        submitBudget.value = 'Change Goal';
        spending.style.display = 'block';
        
     } else if(budget < 50) {
         setMessage(`Please try to save sometihng!!!`, 'red');
-        //inputBudget.value = 'Please set your monthly goal';
+        inputBudget.value = 'Please set your monthly goal';
         //spending.style.display = 'none';
     }
 
@@ -71,8 +71,6 @@ function addSpending(e) {
     if(description.value === '' || spendingAmout === '' || spendingAmout < 0) {
         alert('Please add your spending.');
     } else {
-        
-
         const list = document.getElementById('spending-list');
 
         // Create tr element
@@ -81,8 +79,8 @@ function addSpending(e) {
         // Add content to element
         row.innerHTML = `
         <th scope="row">${description.value}</th>
-        <td>$${spendingAmout}</td>
-        <td><a href='#' class="delete">X</a></td>
+        <td>$<span>${spendingAmout}</span></td>
+        <td><a href='#' class="delete text-dark text-decoration-none">X</a></td>
         `;
         
         // Append Child to list
@@ -103,7 +101,6 @@ function addSpending(e) {
 
     // Set Message
     function setMessage(msg) {
-        
         totalMessage.innerHTML = msg;
     } 
         description.value = '';
@@ -117,9 +114,19 @@ function removeItem(e) {
     if(e.target.classList.contains('delete')) {
         if(confirm('Are you sure?')){
             e.target.parentElement.parentElement.remove();
+
+            //Remove amount from total
+            let total = totalAmount.innerHTML;
+            let itemAmount = parseInt(e.target.parentElement.previousElementSibling.childNodes[1].innerHTML);
+            total -= itemAmount;
+            totalAmount.innerHTML= total;
+            console.log(total);
+                      
         }
+        
     }
-    e.preventDefault();
+    
+  e.preventDefault();
 }
 
 
@@ -130,16 +137,16 @@ function submitDone(e) {
     let balance = Math.abs(budget - totalExpense);
     
     if(budget - totalExpense > 0) {
-        setMessage(`Congrats! You spent ${balance} less than your budget!`, 'green');
+        setMessage(`Congrats! You spent $${balance} less than your budget!`, 'green');
     } else {
-      setMessage(`Ooops! You spent ${balance} more than your budget!`, 'red');
+      setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
     }
+
     // Set Message
     function setMessage(msg, color) {
         finalMessage.innerHTML = msg;
         finalMessage.style.color = color;
     }
-    
-    
+
     e.preventDefault();
 }
