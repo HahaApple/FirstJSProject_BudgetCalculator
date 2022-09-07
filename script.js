@@ -19,9 +19,6 @@ const totalAmount = document.getElementById('total-amount');
 const finalMessage = document.getElementById('final-message');
 const amountList = [];
 
-let total;
-
-
 // Load all event listeners
 loadEventListeners();
 
@@ -40,7 +37,7 @@ function loadEventListeners() {
 
 }
 
-
+// Set Goal
 function setGoal(e) {
     let budget = parseInt(inputBudget.value);
    
@@ -90,7 +87,9 @@ function addSpending(e) {
         // Add total
         amountList.push(spendingItemAmount);
         if(amountList.length > 0) {
-        total = amountList.reduce((pre, curr) => pre + curr, 0); }
+            total = amountList.reduce((pre, curr) => pre + curr, 0); 
+        } 
+        
         //addTotalAmount();
         totalAmount.innerHTML = total;
 
@@ -107,6 +106,9 @@ function addSpending(e) {
         description.value = '';
         amount.value = '';
     }
+
+    // Hide final message
+    finalMessage.style.display = 'none';
     e.preventDefault();
 }
 
@@ -115,7 +117,7 @@ function removeItem(e) {
     if(e.target.classList.contains('delete')) {
         if(confirm('Are you sure?')){
             e.target.parentElement.parentElement.remove();
-            console.log(amountList);
+            //console.log(amountList);
 
             //Remove amount from total
             let total = totalAmount.innerHTML;
@@ -129,14 +131,17 @@ function removeItem(e) {
                     amountList.splice(i, 1);
                 }
             }
-            console.log(amountList);
-            
+                
+
             setMessage(`Total spending: $${total}`);
 
             // Set Message
             function setMessage(msg) {
                 totalMessage.innerHTML = msg;
             }       
+
+            // Hide final message
+            finalMessage.style.display = 'none';
         }
     }
   e.preventDefault();
@@ -160,5 +165,9 @@ function submitDone(e) {
         finalMessage.innerHTML = msg;
         finalMessage.style.color = color;
     }
+
+    // Show Final Message
+    finalMessage.style.display = 'block';
+
     e.preventDefault();
 }
