@@ -115,13 +115,22 @@ function removeItem(e) {
     if(e.target.classList.contains('delete')) {
         if(confirm('Are you sure?')){
             e.target.parentElement.parentElement.remove();
+            console.log(amountList);
 
             //Remove amount from total
             let total = totalAmount.innerHTML;
             let itemAmount = parseInt(e.target.parentElement.previousElementSibling.childNodes[1].innerHTML);
             total -= itemAmount;
             totalAmount.innerHTML= total;
-           
+
+            // Remove from amountList
+            for(let i = 0; i < amountList[i]; i++) {
+                if(amountList[i] === itemAmount) {
+                    amountList.splice(i, 1);
+                }
+            }
+            console.log(amountList);
+            
             setMessage(`Total spending: $${total}`);
 
             // Set Message
