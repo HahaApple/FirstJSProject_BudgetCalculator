@@ -42,13 +42,13 @@ function setGoal(e) {
     let budget = parseInt(inputBudget.value);
    
     if(budget >= 50) {
-       setMessage(`You've set your budget to $${budget}`, 'green');
+       setMessage(`Your budget: $${budget}`, 'green');
        //inputBudget.value = '';
        submitBudget.value = 'Change Goal';
        spending.style.display = 'block';
        
     } else if(budget < 50) {
-        setMessage(`Please try to save sometihng!!!`, 'red');
+        setMessage(`Please try harder!!!`, 'red');
         inputBudget.value = 'Please set your monthly goal';
         //spending.style.display = 'none';
     }
@@ -58,6 +58,8 @@ function setGoal(e) {
         budgetMessage.innerHTML = msg;
         budgetMessage.style.color = color;
     } 
+
+
     e.preventDefault();
 };
 
@@ -78,7 +80,7 @@ function addSpending(e) {
         row.innerHTML = `
         <th scope="row">${description.value}</th>
         <td>$<span>${spendingItemAmount}</span></td>
-        <td><a href='#' class="delete text-dark text-decoration-none">X</a></td>
+        <td><a href='#' class="delete text-dark"><i class="bi bi-trash"></i></a></td>
         `;
         
         // Append Child to list
@@ -114,17 +116,18 @@ function addSpending(e) {
 
 // Remove Item from List
 function removeItem(e) {
-    if(e.target.classList.contains('delete')) {
+    //console.log(e.target);
+    if(e.target.parentElement.classList.contains('delete')) {
         if(confirm('Are you sure?')){
-            e.target.parentElement.parentElement.remove();
-            //console.log(amountList);
+            e.target.parentElement.parentElement.parentElement.remove();
+            //console.log(e.target);
 
             //Remove amount from total
             let total = totalAmount.innerHTML;
-            let itemAmount = parseInt(e.target.parentElement.previousElementSibling.childNodes[1].innerHTML);
+            let itemAmount = parseInt(e.target.parentElement.parentElement.previousElementSibling.childNodes[1].innerHTML);
             total -= itemAmount;
             totalAmount.innerHTML= total;
-
+           
             // Remove from amountList
             for(let i = 0; i < amountList[i]; i++) {
                 if(amountList[i] === itemAmount) {
@@ -132,7 +135,6 @@ function removeItem(e) {
                 }
             }
                 
-
             setMessage(`Total spending: $${total}`);
 
             // Set Message
@@ -142,6 +144,12 @@ function removeItem(e) {
 
             // Hide final message
             finalMessage.style.display = 'none';
+
+            if(amountList.length === 0) {
+                spendingTable.style.display = 'none';
+                totalMessage.style.display = 'none';
+                doneBtn.style.display = 'none';
+            }
         }
     }
   e.preventDefault();
