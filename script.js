@@ -164,8 +164,10 @@ function submitDone(e) {
     
     if(budget - totalExpense > 0) {
         setMessage(`Congrats! You spent $${balance} less than your budget!`, 'green');
-    } else {
+    } else if(budget - totalExpense < 0) {
       setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
+    } else {
+        setMessage(`Hmmm.... You didn't save a penny!`, 'black');
     }
 
     // Set Message
