@@ -178,10 +178,12 @@ function submitDone(e) {
         if(budget - totalExpense < 0) {
             const img = document.createElement("iframe");
             img.src = "stop-it.gif";
+            img.setAttribute("width", 480);
+            img.setAttribute("height", 358);
+            img.setAttribute("frameBorder", 0);         
+            // width="480" height="358" frameBorder="0"
             finalMessage.appendChild(img);
         }
-            
-
         
     }
 
