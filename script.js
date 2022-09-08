@@ -51,7 +51,7 @@ function setGoal(e) {
        spending.style.display = 'block';
        
     } else if(budget < 50) {
-        setMessage(`Please try to save sometihng!!!`, 'red');
+        setMessage(`Please try to save something!!!`, 'red');
         inputBudget.value = 'Please set your monthly goal';
         //spending.style.display = 'none';
     }
@@ -66,10 +66,10 @@ function setGoal(e) {
 
 // Submit Spending
 function addSpending(e) {
-    let spendingAmout = amount.value;
-    let spendingItemAmount = parseInt(spendingAmout);
+    let spendingAmount = amount.value;
+    let spendingItemAmount = parseInt(spendingAmount);
 
-    if(description.value === '' || spendingAmout === '' || spendingAmout <= 0) {
+    if(description.value === '' || spendingAmount === '' || spendingAmount <= 0) {
         alert('Please add your spending.');
     } else {
         const list = document.getElementById('spending-list');
@@ -152,6 +152,24 @@ function submitDone(e) {
         finalMessage.style.color = color;
     }
     e.preventDefault();
+}
+
+function stopIt() {
+    var output = document.getElementById("final-message");
+    output.innerHTML = "";
+
+    var links = [
+        "http://www.dreamomania.info/dreamdictionary/wp-content/uploads/2013/02/V.jpg",
+        "http://i452.photobucket.com/albums/qq248/lostvegasvip/Burning-letter-P-psd26647.png",
+        "http://www.arro-signs.co.uk/red-letter-s.jpg",
+        "http://colleenmorrow.com/wp-content/uploads/2011/09/the-letter-m.png"
+    ];
+
+    var choices = ["Vintage", "Plaid", "Skater", "Maxi"];
+    var sentence = "<p>You picked a " + choices[userChoice] + " doll.</p>"
+    var img = '<img src="' + links[userChoice] + '">';
+
+    output.innerHTML = sentence + img;
 }
 
 // just testing if it worked
