@@ -165,7 +165,7 @@ function submitDone(e) {
     if(budget - totalExpense > 0) {
         setMessage(`Congrats! You spent $${balance} less than your budget!`, 'green');
     } else if(budget - totalExpense < 0) {
-      setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
+        setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
     } else {
         setMessage(`Hmmm.... You didn't save a penny!`, 'black');
     }
@@ -174,10 +174,21 @@ function submitDone(e) {
     function setMessage(msg, color) {
         finalMessage.innerHTML = msg;
         finalMessage.style.color = color;
+        
+        if(budget - totalExpense < 0) {
+            const img = document.createElement("iframe");
+            img.src = "stop-it.gif";
+            finalMessage.appendChild(img);
+        }
+            
+
+        
     }
 
     // Show Final Message
     finalMessage.style.display = 'block';
-
+    
+        
+        
     e.preventDefault();
 }
