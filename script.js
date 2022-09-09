@@ -181,8 +181,17 @@ function submitDone(e) {
             img.setAttribute("width", 480);
             img.setAttribute("height", 358);
             img.setAttribute("frameBorder", 0);         
-            // width="480" height="358" frameBorder="0"
             finalMessage.appendChild(img);
+
+        } else if (budget - totalExpense > 0) {
+            const img = document.createElement("iframe");
+            img.src = "https://www.youtube.com/embed/aKn0HddzuWM";
+            img.setAttribute("title", "YouTube video player");
+            img.setAttribute("allow", "accelerometer");
+            img.setAttribute("frameBorder", 0);         
+            finalMessage.appendChild(img);
+
+            // <iframe width="560" height="315" src="https://www.youtube.com/embed/aKn0HddzuWM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         }
         
     }
