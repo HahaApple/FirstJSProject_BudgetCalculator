@@ -90,6 +90,7 @@ function addSpending(e) {
         amountList.push(spendingItemAmount);
         if(amountList.length > 0) {
             total = amountList.reduce((pre, curr) => pre + curr, 0); 
+            totalMessage.style.display = 'block';
         } 
         
         //addTotalAmount();
