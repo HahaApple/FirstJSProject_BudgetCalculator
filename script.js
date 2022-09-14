@@ -166,7 +166,7 @@ function submitDone(e) {
     if(budget - totalExpense > 0) {
         setMessage(`Congrats! You spent $${balance} less than your budget!`, 'green');
     } else if(budget - totalExpense < 0) {
-      setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
+        setMessage(`Ooops! You spent $${balance} more than your budget!`, 'red');
     } else {
         setMessage(`Hmmm.... You didn't save a penny!`, 'black');
     }
@@ -175,10 +175,32 @@ function submitDone(e) {
     function setMessage(msg, color) {
         finalMessage.innerHTML = msg;
         finalMessage.style.color = color;
+        
+        if(budget - totalExpense < 0) {
+            const img = document.createElement("iframe");
+            img.src = "stop-it.gif";
+            img.setAttribute("width", 480);
+            img.setAttribute("height", 358);
+            img.setAttribute("frameBorder", 0);         
+            finalMessage.appendChild(img);
+
+        } else if (budget - totalExpense > 0) {
+            const img = document.createElement("iframe");
+            img.src = "https://www.youtube.com/embed/aKn0HddzuWM";
+            img.setAttribute("title", "YouTube video player");
+            img.setAttribute("allow", "accelerometer");
+            img.setAttribute("frameBorder", 0);         
+            finalMessage.appendChild(img);
+
+            // <iframe width="560" height="315" src="https://www.youtube.com/embed/aKn0HddzuWM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        }
+        
     }
 
     // Show Final Message
     finalMessage.style.display = 'block';
-
+    
+        
+        
     e.preventDefault();
 }
